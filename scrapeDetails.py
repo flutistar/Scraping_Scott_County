@@ -41,14 +41,15 @@ class scrapeDetails():
         worksheet.write(row_count, 10, "LAND VALUE")
         worksheet.write(row_count, 11, "BLDG VALUE")
         worksheet.write(row_count, 12, "JUST VALUE")
-        i = 0
+        # i = 0
         for url in Urls:
-            if i>3:
-                break
-            i += 1
+            # if i>3:
+            #     break
+            # i += 1
             row_count +=1
             driver.get(url)
             print(url)
+            time.sleep(5)
             # Check Agreement Button
             if len(driver.find_elements_by_xpath("//div[@class = 'modal-dialog']")):
                 agreeButton = driver.find_element_by_xpath("//div[@class = 'modal-dialog']/div[@class = 'modal-content']/div[@class = 'modal-focus-target']/div[@class = 'modal-footer']/a[@class = 'btn btn-primary button-1']")
@@ -122,46 +123,5 @@ class scrapeDetails():
                 else:
                     print('no Section14')
             print("<><><><><><><><><><><><><><><><><><><><><><><><>")
-        # searchButton = driver.find_element_by_xpath("//a[@id = 'ctlBodyPane_ctl00_ctl01_btnSearch']")
-        # searchButton.click()
-        # parcelList = driver.find_elements_by_xpath("//table[@id ='ctlBodyPane_ctl00_ctl01_gvwParcelResults']/tbody/tr/td[2]/a")
-        # for items in parcelList:
-        #     url = items.get_attribute('href')
-        # print(len(parcelList) 'parcels scraped')
         workbook.close()
         driver.quit()
-        # for pcode in postcodes:
-        #     # i+=1
-        #     # if i == 3:
-        #     #     break    
-        #     driver.get(baseUrl)
-        #     search_box = driver.find_element(By.XPATH, "//input[@data-test-id='address-box-input']")
-        #     time.sleep(1)
-        #     search_box.clear()
-        #     search_box.send_keys(pcode)
-        #     search_box.submit()
-        #     openRst = driver.find_elements_by_xpath("//div[@data-test-id='openrestaurants']/section[@data-test-id='restaurant']/a")
-        #     cnt1 = 0
-        #     for item1 in openRst:
-        #         restaurantUrls.append(item1.get_attribute('href'))
-        #         cnt1 += 1
-        #         cnt += 1
-        #     print(cnt, 'urls Scraped', pcode, '--open--', cnt1)
-        #     cnt2 = 0
-        #     closeRst = driver.find_elements_by_xpath("//div[@data-test-id='closedrestaurants']/section[@data-test-id='restaurant']/a")
-        #     for item2 in closeRst:
-        #         restaurantUrls.append(item2.get_attribute('href'))
-        #         cnt2 += 1
-        #         cnt += 1
-        #     print(cnt, 'urls Scraped', pcode, "--close--", cnt2)
-        #     cnt3 = 0
-        #     offRst = driver.find_elements_by_xpath("//div[@data-test-id='offlinerestaurants']/section[@data-test-id='restaurant']/a")
-        #     for item3 in offRst:
-        #         restaurantUrls.append('off: ' + item3.get_attribute('href'))
-        #         cnt3 += 1
-        #         cnt3 += 1
-        #         cnt += 1
-        #     print(cnt, 'urls Scraped', pcode, "--off--", cnt3)            
-        #     time.sleep(0.5)
-        # driver.quit()
-        # return restaurantUrls
