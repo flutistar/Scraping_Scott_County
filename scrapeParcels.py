@@ -41,6 +41,7 @@ class scrapRestaurants():
             for item3 in offRst:
                 restaurantUrls.append('off: ' + item3.get_attribute('href'))
                 cnt3 += 1
+                cnt3 += 1
                 cnt += 1
             print(cnt, 'urls Scraped', pcode, "--off--", cnt3)            
             time.sleep(0.5)
