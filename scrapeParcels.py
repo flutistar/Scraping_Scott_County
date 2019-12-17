@@ -43,6 +43,6 @@ class scrapRestaurants():
                 cnt3 += 1
                 cnt += 1
             print(cnt, 'urls Scraped', pcode, "--off--", cnt3)            
-            time.sleep(1.5)
+            time.sleep(0.5)
         driver.quit()
         return restaurantUrls
