@@ -53,8 +53,9 @@ class scrapeDetails():
         i = 0
         for row_count in range(2, worksheet.max_row):
             # if i > 50:
-            #     break
-            # i += 1
+                # break
+            i += 1
+            print("Scraped: {} items".format(i))
             # Initialize cell value lists
             valueList = []
             for idx in range(0,18):
@@ -66,7 +67,6 @@ class scrapeDetails():
             time.sleep(randomTime)
             driver.get(url)
             parcel = worksheet.cell(row = row_count, column = 1).value
-            print(parcel)
             # Check Agreement Button
             if len(driver.find_elements_by_xpath("//div[@class = 'modal-dialog']")):
                 agreeButton = driver.find_element_by_xpath("//div[@class = 'modal-dialog']/div[@class = 'modal-content']/div[@class = 'modal-focus-target']/div[@class = 'modal-footer']/a[@class = 'btn btn-primary button-1']")
@@ -84,8 +84,9 @@ class scrapeDetails():
                     element = driver.find_element_by_xpath("//span[@id = '" + collapse + "']")
                     driver.execute_script("return arguments[0].scrollIntoView();", element)    
                     element.click()
-                    time.sleep(randomTime)                
+                    time.sleep(0.5)                
                     element.click()
+                    time.sleep(randomTime)
             if len(driver.find_elements_by_xpath("//section[@id = 'ctlBodyPane_ctl00_mSection']")):
                 if len(driver.find_elements_by_xpath("//span[@id = 'ctlBodyPane_ctl00_ctl01_lblAlternateID']")):
                     valueList[0] = driver.find_element_by_xpath("//span[@id = 'ctlBodyPane_ctl00_ctl01_lblAlternateID']").text
@@ -94,9 +95,7 @@ class scrapeDetails():
                     # print('altKey--  ', altKey)
                 if len(driver.find_elements_by_xpath("//span[@id = 'ctlBodyPane_ctl00_ctl01_lblPropertyAddress']")):
                     valueList[1] = driver.find_element_by_xpath("//span[@id = 'ctlBodyPane_ctl00_ctl01_lblPropertyAddress']").text
-                    
                     valueList[1] = valueList[1].replace('\n', ', ')
-                    print(valueList[1])
                     # worksheet.cell(row = row_count, column = 50).value = propertyAddress
                     # print('property--  ', propertyAddress)
                 if len(driver.find_elements_by_xpath("//span[@id = 'ctlBodyPane_ctl00_ctl01_lblLegalDescription']")):
@@ -117,13 +116,14 @@ class scrapeDetails():
                     element = driver.find_element_by_xpath("//span[@id = '" + collapse + "']")
                     driver.execute_script("return arguments[0].scrollIntoView();", element)                    
                     element.click()
-                    time.sleep(1)
+                    time.sleep(0.5)
                     element.click()
+                    time.sleep(randomTime)
             if len(driver.find_elements_by_xpath("//section[@id = 'ctlBodyPane_ctl02_mSection']")):
                 if len(driver.find_elements_by_xpath("//span[@id = 'ctlBodyPane_ctl02_ctl01_lstDeed_ctl01_lblDeedName_lblSearch']")):
                     valueList[4] = driver.find_element_by_xpath("//span[@id = 'ctlBodyPane_ctl02_ctl01_lstDeed_ctl01_lblDeedName_lblSearch']").text
                     # worksheet.cell(row = row_count, column = 53).value = ownerName
-                    # print('ownername--  ', ownerName)
+                    # print('ownername--  ', valueList[4])
                 if len(driver.find_elements_by_xpath("//a[@id = 'ctlBodyPane_ctl02_ctl01_lstDeed_ctl01_lblDeedName_lnkSearch']")):
                     valueList[4] = driver.find_element_by_xpath("//a[@id = 'ctlBodyPane_ctl02_ctl01_lstDeed_ctl01_lblDeedName_lnkSearch']").text
                     # worksheet.cell(row = row_count, column = 53).value = ownerName
@@ -139,6 +139,8 @@ class scrapeDetails():
                 if len(driver.find_elements_by_xpath("//span[@id = 'ctlBodyPane_ctl02_ctl01_lstDeed_ctl01_lblAddress3']")):
                     valueList[5] += driver.find_element_by_xpath("//span[@id = 'ctlBodyPane_ctl02_ctl01_lstDeed_ctl01_lblAddress3']").text + ', '
                 valueList[5] = valueList[5][:-2]
+                print('ownername--  ', valueList[4])
+                print('owneraddr--  ', valueList[5])
                 # worksheet.cell(row = row_count, column = 54).value = owner[:-2]
 
                 if len(driver.find_elements_by_xpath("//span[@id = 'ctlBodyPane_ctl02_ctl01_lstDeed_ctl03_lblDeedName_lblSearch']")):
@@ -193,8 +195,9 @@ class scrapeDetails():
                     element = driver.find_element_by_xpath("//span[@id = '" + collapse + "']")
                     driver.execute_script("return arguments[0].scrollIntoView();", element)  
                     element.click()                  
-                    time.sleep(1)
+                    time.sleep(0.5)
                     element.click()
+                    time.sleep(randomTime)
             if len(driver.find_elements_by_xpath("//section[@id = 'ctlBodyPane_ctl06_mSection']")):
                 if len(driver.find_elements_by_xpath("//span[@id = 'ctlBodyPane_ctl06_ctl01_lstResidential_ctl00_lblOccupancy']")):
                     valueList[10] = driver.find_element_by_xpath("//span[@id = 'ctlBodyPane_ctl06_ctl01_lstResidential_ctl00_lblOccupancy']").text
@@ -212,12 +215,13 @@ class scrapeDetails():
                     element = driver.find_element_by_xpath("//span[@id = '" + collapse + "']")
                     driver.execute_script("return arguments[0].scrollIntoView();", element)                    
                     element.click()
-                    time.sleep(1)
+                    time.sleep(0.5)
                     element.click()
+                    time.sleep(randomTime)
             if len(driver.find_elements_by_xpath("//section[@id = 'ctlBodyPane_ctl12_mSection']")):
-                if len(driver.find_elements_by_xpath("//section[@id = 'ctlBodyPane_ctl12_mSection']/div/div[1]/table/tbody/tr[1]")):
-                    valueList[12] = driver.find_element_by_xpath("//section[@id = 'ctlBodyPane_ctl12_mSection']/div/div[1]/table/tbody/tr[1]/td[1]").text
-                    valueList[13] = driver.find_element_by_xpath("//section[@id = 'ctlBodyPane_ctl12_mSection']/div/div[1]/table/tbody/tr[1]/td[8]").text
+                if len(driver.find_elements_by_xpath("//table[@id = 'ctlBodyPane_ctl12_ctl01_gvwSales']/tbody/tr[1]")):
+                    valueList[12] = driver.find_element_by_xpath("//table[@id = 'ctlBodyPane_ctl12_ctl01_gvwSales']/tbody/tr[1]/td[1]").text
+                    valueList[13] = driver.find_element_by_xpath("//table[@id = 'ctlBodyPane_ctl12_ctl01_gvwSales']/tbody/tr[1]/td[8]").text
                     # worksheet.cell(row = row_count, column = 57).value = saleDate
                     # worksheet.cell(row = row_count, column = 58).value = amount
                     # print('saleDate--  ', saleDate)
@@ -232,6 +236,7 @@ class scrapeDetails():
                     element.click()   
                     time.sleep(1)                
                     element.click()
+                    time.sleep(randomTime) 
             if len(driver.find_elements_by_xpath("//section[@id = 'ctlBodyPane_ctl14_mSection']")):
                 if len(driver.find_elements_by_xpath("//section[@id = 'ctlBodyPane_ctl14_mSection']/div/table")):
                     valueList[14] = driver.find_element_by_xpath("//section[@id = 'ctlBodyPane_ctl14_mSection']/div/table/tbody/tr[2]/td[3]").text
